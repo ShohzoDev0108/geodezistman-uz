@@ -8,8 +8,21 @@ def home(request):
 
 
 def kurslar_royxati(request):
+    """Barcha kurslar. Navbar dropdown'i ?kategoriya=<slug> orqali filtrlaydi;
+    noma'lum slug kelsa barcha kurslar ko'rsatiladi."""
     kurslar = Course.objects.select_related('kategoriya')
-    return render(request, 'courses/courses.html', {'kurslar': kurslar})
+
+    kategoriya_slug = request.GET.get('kategoriya', '')
+    tanlangan_kategoriya = None
+    if kategoriya_slug:
+        tanlangan_kategoriya = CourseCategory.objects.filter(slug=kategoriya_slug).first()
+        if tanlangan_kategoriya is not None:
+            kurslar = kurslar.filter(kategoriya=tanlangan_kategoriya)
+
+    return render(request, 'courses/courses.html', {
+        'kurslar': kurslar,
+        'tanlangan_kategoriya': tanlangan_kategoriya,
+    })
 
 
 def kurs_detali(request, pk):

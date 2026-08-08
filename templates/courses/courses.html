@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}Kurslar — Geodezistman.uz{% endblock %}
+{% block title %}{% if tanlangan_kategoriya %}{{ tanlangan_kategoriya.nomi }}{% else %}Kurslar{% endif %} — Geodezistman.uz{% endblock %}
 
 {% block content %}
 <div class="sahifa">
-  <h1 class="sahifa-sarlavha">Barcha kurslar</h1>
+  <h1 class="sahifa-sarlavha">
+    {% if tanlangan_kategoriya %}{{ tanlangan_kategoriya.nomi }}{% else %}Barcha kurslar{% endif %}
+  </h1>
+  {% if tanlangan_kategoriya %}
+    <p class="sahifa-izoh"><a href="{% url 'kurslar_royxati' %}">&larr; Barcha kurslarni ko'rish</a></p>
+  {% endif %}
 
   <div class="karta-grid">
     {% for kurs in kurslar %}
