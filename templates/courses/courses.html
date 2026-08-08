@@ -8,11 +8,11 @@
 
   <div class="karta-grid">
     {% for kurs in kurslar %}
-      <div class="karta">
+      <a class="karta" href="{% url 'kurs_detali' kurs.pk %}">
         <div class="karta-teg">{{ kurs.kategoriya.nomi }}</div>
         <div class="karta-nomi">{{ kurs.nomi }}</div>
         <div class="karta-tavsif">{{ kurs.tavsifi }}</div>
-      </div>
+      </a>
     {% empty %}
       <p class="bosh-yoq">Hozircha kurslar mavjud emas.</p>
     {% endfor %}

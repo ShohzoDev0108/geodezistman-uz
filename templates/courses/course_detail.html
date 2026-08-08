@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}{{ kurs.nomi }} — Geodezistman.uz{% endblock %}
+
+{% block content %}
+<div class="sahifa">
+  <div class="detal-bosh">
+    <a class="bosh-utish" href="{% url 'kurslar_royxati' %}">&larr; Barcha kurslar</a>
+
+    {% if kurs.muqova_rasm %}
+      <img class="detal-muqova" src="{{ kurs.muqova_rasm.url }}" alt="{{ kurs.nomi }}">
+    {% endif %}
+
+    <div class="karta-teg">{{ kurs.kategoriya.nomi }}</div>
+    <h1 class="detal-nomi">{{ kurs.nomi }}</h1>
+    <p class="detal-tavsif">{{ kurs.tavsifi }}</p>
+    <div class="detal-meta">
+      {{ darslar|length }} TA DARS &nbsp;&middot;&nbsp; {{ kurs.yaratilgan_sana|date:"d.m.Y" }}
+    </div>
+  </div>
+
+  <div class="dars-royxat">
+    {% for dars in darslar %}
+      <div class="dars">
+        <button type="button" class="dars-bosh">
+          <span class="dars-raqam">{{ dars.tartib_raqami|stringformat:"02d" }}</span>
+          <span class="dars-sarlavha">{{ dars.sarlavha }}</span>
+          <svg class="dars-chev" viewBox="0 0 10 6"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+        </button>
+        <div class="dars-tana">
+          {% if dars.matn %}{{ dars.matn }}{% else %}Bu dars uchun matn hali qo'shilmagan.{% endif %}
+          {% if dars.video_link %}
+            <a class="dars-video" href="{{ dars.video_link }}" target="_blank" rel="noopener">VIDEO DARSNI OCHISH &rarr;</a>
+          {% endif %}
+        </div>
+      </div>
+    {% empty %}
+      <p class="bosh-yoq">Bu kursga hali darslar qo'shilmagan.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  (function () {
+    document.querySelectorAll('.dars-bosh').forEach((tugma) => {
+      tugma.addEventListener('click', () => {
+        tugma.closest('.dars').classList.toggle('ochiq');
+      });
+    });
+  })();
+</script>
+{% endblock %}
