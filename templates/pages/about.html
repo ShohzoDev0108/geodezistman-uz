@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Biz haqimizda — Geodezistman.uz{% endblock %}
+
+{% block content %}
+<div class="sahifa">
+  <h1 class="sahifa-sarlavha">Biz haqimizda</h1>
+
+  <div class="matn-blok">
+    <p>
+      <strong>Geodezistman.uz</strong> — O'zbekiston geodezistlari uchun ochiq ta'lim
+      platformasi. Maqsadimiz sohaga oid bilim, hujjat namunalari va amaliy tajribani
+      bir joyga to'plab, o'zbek tilida yetkazish.
+    </p>
+    <p>
+      Geodeziya bo'yicha sifatli o'quv materiallarining aksariyati rus yoki ingliz
+      tilida. Yangi mutaxassislar esa ko'pincha ish jarayonida, ustoz yordamisiz
+      o'rganishga majbur bo'ladi. Biz shu bo'shliqni to'ldirmoqchimiz.
+    </p>
+
+    <h2>Platformada nima bor</h2>
+    <ul>
+      <li>
+        <a href="{% url 'kurslar_royxati' %}">Kurslar</a> — yo'l va bino qurilishi
+        geodeziyasi, kadastr ishlari hamda GPS/GNSS asoslari bo'yicha bosqichma-bosqich
+        darslar.
+      </li>
+      <li>
+        <a href="{% url 'materiallar_royxati' %}">Materiallar</a> — o'zbekcha va ruscha
+        kitoblar, darsliklar va tayyor hujjat namunalari.
+      </li>
+      <li>
+        <a href="{% url 'uskunalar_royxati' %}">Uskunalar</a> — tacheometr, nivelir va
+        GNSS priborlari bo'yicha ma'lumot va narx diapazonlari.
+      </li>
+    </ul>
+
+    <h2>Kimlar uchun</h2>
+    <p>
+      Geodeziya yo'nalishi talabalari, ishni endi boshlagan yosh mutaxassislar,
+      qurilish tashkilotlarining ijro-geodezik nazorat xodimlari va kadastr sohasida
+      ishlaydiganlar uchun.
+    </p>
+
+    <h2>Loyiha holati</h2>
+    <p>
+      Platforma hozirda faol ishlab chiqilmoqda. Yangi kurslar va materiallar muntazam
+      qo'shib boriladi. Taklif yoki savolingiz bo'lsa —
+      <a href="{% url 'boglanish' %}">bog'lanish sahifasi</a> orqali yozing.
+    </p>
+  </div>
+</div>
+{% endblock %}

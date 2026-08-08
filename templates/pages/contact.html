@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Bog'lanish — Geodezistman.uz{% endblock %}
+
+{% block content %}
+<div class="sahifa">
+  <h1 class="sahifa-sarlavha">Bog'lanish</h1>
+  <p class="sahifa-izoh">Savol, taklif yoki hamkorlik bo'yicha biz bilan bog'laning</p>
+
+  {# TODO: quyidagi aloqa ma'lumotlari namuna sifatida yozilgan — haqiqiylari bilan almashtirilsin #}
+  <ul class="aloqa-royxat">
+    <li class="aloqa-karta">
+      <div class="aloqa-turi">Email</div>
+      <a class="aloqa-qiymat" href="mailto:info@geodezistman.uz">info@geodezistman.uz</a>
+    </li>
+    <li class="aloqa-karta">
+      <div class="aloqa-turi">Telegram</div>
+      <a class="aloqa-qiymat" href="https://t.me/geodezistman" target="_blank" rel="noopener">@geodezistman</a>
+    </li>
+    <li class="aloqa-karta">
+      <div class="aloqa-turi">Manzil</div>
+      <span class="aloqa-qiymat">Toshkent, O'zbekiston</span>
+    </li>
+  </ul>
+
+  <div class="matn-blok">
+    <h2>Qanday yordam bera olamiz</h2>
+    <ul>
+      <li>Kurs yoki material bo'yicha savollar</li>
+      <li>Saytda xatolik topsangiz — xabar bering</li>
+      <li>O'z materialingizni platformaga joylashtirish</li>
+      <li>Hamkorlik va reklama takliflari</li>
+    </ul>
+
+    <p>
+      Xabaringizni yuborish uchun hozircha yuqoridagi email yoki Telegram'dan
+      foydalaning. Onlayn xabar yuborish formasi keyingi bosqichda qo'shiladi.
+    </p>
+  </div>
+</div>
+{% endblock %}

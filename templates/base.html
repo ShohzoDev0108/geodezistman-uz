@@ -42,8 +42,8 @@
           <a href="{% url 'uskunalar_royxati' %}?kategoriya=nivelirlar">Nivelirlar</a>
         </div>
       </li>
-      <li class="nav-item"><a href="#">Biz haqimizda</a></li>
-      <li class="nav-item"><a href="#">Bog'lanish</a></li>
+      <li class="nav-item"><a href="{% url 'biz_haqimizda' %}">Biz haqimizda</a></li>
+      <li class="nav-item"><a href="{% url 'boglanish' %}">Bog'lanish</a></li>
     </ul>
   </div>
   <div class="nav-right">
@@ -79,8 +79,8 @@
     <div class="footer-ustun">
       <h4>Sayt</h4>
       <a href="{% url 'home' %}">Bosh sahifa</a>
-      <a href="#">Biz haqimizda</a>
-      <a href="#">Bog'lanish</a>
+      <a href="{% url 'biz_haqimizda' %}">Biz haqimizda</a>
+      <a href="{% url 'boglanish' %}">Bog'lanish</a>
     </div>
   </div>
   <div class="footer-past">
