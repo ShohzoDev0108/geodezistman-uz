@@ -187,3 +187,376 @@ body{background:var(--bp-bg);}
   opacity:0;
   animation:fadeUp 1s ease-out 3s forwards;
 }
+
+/* ============================================================
+   UMUMIY SAHIFA USLUBLARI — base.html'dan meros oluvchi sahifalar
+   ============================================================ */
+
+/* Ichki sahifalarda navbar hero ustida emas, oddiy oqimda turadi */
+.navbar-solid{
+  position:relative;
+  background:var(--bp-bg);
+}
+
+.sahifa{
+  background:var(--bp-bg);
+  min-height:100vh;
+  padding:7rem 2.5rem 3rem;
+  font-family:'Inter',sans-serif;
+}
+.sahifa-sarlavha{
+  font-family:'Big Shoulders Display',sans-serif;
+  font-weight:700;
+  font-size:2.2rem;
+  color:var(--bp-chalk);
+  letter-spacing:0.03em;
+  margin-bottom:2rem;
+  text-align:center;
+}
+.sahifa-izoh{
+  text-align:center;
+  color:var(--bp-steel);
+  font-size:0.95rem;
+  margin:-1.4rem 0 2rem;
+}
+.sahifa-izoh a{color:var(--bp-brass);text-decoration:none;}
+.sahifa-izoh a:hover{text-decoration:underline;}
+.bosh-utish{
+  display:inline-block;
+  margin-bottom:2rem;
+  color:var(--bp-steel);
+  text-decoration:none;
+  font-size:0.9rem;
+}
+.bosh-utish:hover{color:var(--bp-chalk);}
+.bosh-yoq{color:var(--bp-steel);}
+
+/* ---------- Kartochkalar: kurs / material / uskuna uchun umumiy ---------- */
+.karta-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+  gap:1.5rem;
+  max-width:1100px;
+  margin:0 auto;
+}
+.karta{
+  background:#0E2A3D;
+  border:1px solid var(--bp-grid);
+  border-radius:4px;
+  padding:1.5rem;
+  display:block;
+  text-decoration:none;
+  transition:border-color 0.15s ease, transform 0.15s ease;
+}
+a.karta:hover{border-color:var(--bp-brass);transform:translateY(-2px);}
+.karta-teg{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.06em;
+  color:var(--bp-brass);
+  text-transform:uppercase;
+  margin-bottom:0.6rem;
+}
+.karta-nomi{
+  font-size:1.15rem;
+  font-weight:500;
+  color:var(--bp-chalk);
+  margin-bottom:0.6rem;
+}
+.karta-tavsif{
+  font-size:0.9rem;
+  color:var(--bp-steel);
+  line-height:1.5;
+}
+.karta-past{
+  margin-top:1rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:0.75rem;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.05em;
+  color:var(--bp-steel);
+}
+.karta-yuklab{
+  color:var(--bp-brass);
+  text-decoration:none;
+  border:1px solid var(--bp-brass);
+  border-radius:2px;
+  padding:0.35rem 0.8rem;
+  white-space:nowrap;
+  transition:background 0.15s ease,color 0.15s ease;
+}
+.karta-yuklab:hover{background:var(--bp-brass);color:#241505;}
+
+/* ---------- Filtr paneli: materiallar / uskunalar ---------- */
+.filtr-blok{max-width:1100px;margin:0 auto 2rem;}
+.filtr-qator{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:0.6rem;
+  margin-bottom:0.9rem;
+}
+.filtr-nom{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--bp-steel);
+  margin-right:0.4rem;
+  min-width:88px;
+}
+.filtr-tugma{
+  background:transparent;
+  border:1px solid var(--bp-grid);
+  border-radius:2px;
+  color:var(--bp-steel);
+  font-family:'Inter',sans-serif;
+  font-size:0.85rem;
+  padding:0.45rem 1rem;
+  cursor:pointer;
+  transition:border-color 0.15s ease,color 0.15s ease,background 0.15s ease;
+}
+.filtr-tugma:hover{color:var(--bp-chalk);border-color:var(--bp-steel);}
+.filtr-tugma.faol{
+  background:var(--bp-brass);
+  border-color:var(--bp-brass);
+  color:#241505;
+  font-weight:500;
+}
+.filtr-natija{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.75rem;
+  letter-spacing:0.06em;
+  color:var(--bp-steel);
+}
+
+/* ---------- Kategoriya guruhi sarlavhasi (uskunalar) ---------- */
+.bolim{margin-bottom:2.75rem;}
+.bolim-sarlavha{
+  font-family:'Big Shoulders Display',sans-serif;
+  font-weight:600;
+  font-size:1.5rem;
+  letter-spacing:0.04em;
+  color:var(--bp-chalk);
+  padding-bottom:0.6rem;
+  margin-bottom:1.25rem;
+  border-bottom:1px solid var(--bp-grid);
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:1rem;
+  max-width:1100px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.bolim-soni{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.08em;
+  color:var(--bp-brass);
+}
+
+/* ---------- Kurs detali va darslar akkordeoni ---------- */
+.detal-bosh{
+  max-width:1100px;
+  margin:0 auto 2.5rem;
+  border-bottom:1px solid var(--bp-grid);
+  padding-bottom:1.75rem;
+}
+.detal-nomi{
+  font-family:'Big Shoulders Display',sans-serif;
+  font-weight:700;
+  font-size:2.4rem;
+  line-height:1.1;
+  letter-spacing:0.02em;
+  color:var(--bp-chalk);
+  margin:0.5rem 0 0.9rem;
+}
+.detal-tavsif{
+  color:var(--bp-steel);
+  font-size:0.98rem;
+  line-height:1.65;
+  max-width:70ch;
+}
+.detal-meta{
+  margin-top:1.2rem;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.07em;
+  color:var(--bp-steel);
+}
+.detal-muqova{
+  width:100%;
+  max-height:320px;
+  object-fit:cover;
+  border:1px solid var(--bp-grid);
+  border-radius:4px;
+  margin-bottom:1.5rem;
+}
+.dars-royxat{max-width:1100px;margin:0 auto;}
+.dars{
+  border:1px solid var(--bp-grid);
+  border-radius:4px;
+  background:#0E2A3D;
+  margin-bottom:0.75rem;
+  overflow:hidden;
+}
+.dars-bosh{
+  width:100%;
+  background:none;
+  border:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding:1.1rem 1.4rem;
+  text-align:left;
+  font-family:'Inter',sans-serif;
+  color:var(--bp-chalk);
+  font-size:1rem;
+  transition:background 0.15s ease;
+}
+.dars-bosh:hover{background:var(--bp-grid);}
+.dars-raqam{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.8rem;
+  color:var(--bp-brass);
+  min-width:2.2rem;
+}
+.dars-sarlavha{flex:1;}
+.dars-chev{
+  width:12px;height:12px;
+  color:var(--bp-steel);
+  transition:transform 0.2s ease;
+  flex-shrink:0;
+}
+.dars.ochiq .dars-chev{transform:rotate(180deg);}
+.dars-tana{
+  display:none;
+  padding:0 1.4rem 1.3rem 4.6rem;
+  color:var(--bp-steel);
+  font-size:0.93rem;
+  line-height:1.7;
+  white-space:pre-line;
+}
+.dars.ochiq .dars-tana{display:block;}
+.dars-video{
+  display:inline-block;
+  margin-top:0.9rem;
+  color:var(--bp-brass);
+  text-decoration:none;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.78rem;
+  letter-spacing:0.05em;
+}
+.dars-video:hover{text-decoration:underline;}
+
+/* ---------- Statik sahifalar: biz haqimizda / bog'lanish ---------- */
+.matn-blok{
+  max-width:70ch;
+  margin:0 auto;
+  color:var(--bp-steel);
+  font-size:0.98rem;
+  line-height:1.75;
+}
+.matn-blok h2{
+  font-family:'Big Shoulders Display',sans-serif;
+  font-weight:600;
+  font-size:1.45rem;
+  letter-spacing:0.04em;
+  color:var(--bp-chalk);
+  margin:2.2rem 0 0.8rem;
+}
+.matn-blok p{margin-bottom:1rem;}
+.matn-blok ul{margin:0 0 1rem 1.2rem;}
+.matn-blok li{margin-bottom:0.45rem;}
+.matn-blok a{color:var(--bp-brass);text-decoration:none;}
+.matn-blok a:hover{text-decoration:underline;}
+.aloqa-royxat{
+  list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:1rem;
+  max-width:1100px;
+  margin:0 auto 2.5rem;
+}
+.aloqa-karta{
+  background:#0E2A3D;
+  border:1px solid var(--bp-grid);
+  border-radius:4px;
+  padding:1.4rem;
+}
+.aloqa-turi{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.07em;
+  text-transform:uppercase;
+  color:var(--bp-brass);
+  margin-bottom:0.5rem;
+}
+.aloqa-qiymat{color:var(--bp-chalk);font-size:1rem;text-decoration:none;}
+a.aloqa-qiymat:hover{color:var(--bp-brass);}
+
+/* ---------- Footer ---------- */
+.site-footer{
+  background:var(--bp-bg);
+  border-top:1px solid var(--bp-grid);
+  font-family:'Inter',sans-serif;
+  padding:3rem 2.5rem 1.5rem;
+}
+.footer-ichki{
+  max-width:1100px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  gap:2.5rem;
+}
+.footer-shior{
+  color:var(--bp-steel);
+  font-size:0.88rem;
+  margin-top:0.7rem;
+  max-width:32ch;
+  line-height:1.6;
+}
+.footer-ustun h4{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.72rem;
+  font-weight:500;
+  letter-spacing:0.09em;
+  text-transform:uppercase;
+  color:var(--bp-brass);
+  margin-bottom:0.9rem;
+}
+.footer-ustun a{
+  display:block;
+  color:var(--bp-steel);
+  text-decoration:none;
+  font-size:0.88rem;
+  padding:0.25rem 0;
+  transition:color 0.15s ease;
+}
+.footer-ustun a:hover{color:var(--bp-chalk);}
+.footer-past{
+  max-width:1100px;
+  margin:2.5rem auto 0;
+  padding-top:1.25rem;
+  border-top:1px solid var(--bp-grid);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  flex-wrap:wrap;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.07em;
+  color:var(--bp-steel);
+}
+
+@media (max-width:820px){
+  .footer-ichki{grid-template-columns:1fr;gap:1.75rem;}
+  .sahifa{padding:5rem 1.25rem 2.5rem;}
+  .nav-links{display:none;}
+}
