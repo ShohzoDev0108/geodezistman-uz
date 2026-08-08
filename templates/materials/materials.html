@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Materiallar — Geodezistman.uz{% endblock %}
+
+{% block content %}
+<div class="sahifa">
+  <h1 class="sahifa-sarlavha">Materiallar</h1>
+  <p class="sahifa-izoh">Geodeziya bo'yicha kitoblar, darsliklar va hujjat namunalari</p>
+
+  <div class="filtr-blok">
+    <div class="filtr-qator">
+      <span class="filtr-nom">Til</span>
+      <button type="button" class="filtr-tugma{% if not tanlangan_til %} faol{% endif %}"
+              data-guruh="til" data-qiymat="">Barchasi</button>
+      {% for kod, nomi in til_tanlovlari %}
+        <button type="button" class="filtr-tugma{% if tanlangan_til == kod %} faol{% endif %}"
+                data-guruh="til" data-qiymat="{{ kod }}">{{ nomi }}</button>
+      {% endfor %}
+    </div>
+
+    <div class="filtr-qator">
+      <span class="filtr-nom">Turi</span>
+      <button type="button" class="filtr-tugma{% if not tanlangan_tur %} faol{% endif %}"
+              data-guruh="turi" data-qiymat="">Barchasi</button>
+      {% for kod, nomi in tur_tanlovlari %}
+        <button type="button" class="filtr-tugma{% if tanlangan_tur == kod %} faol{% endif %}"
+                data-guruh="turi" data-qiymat="{{ kod }}">{{ nomi }}</button>
+      {% endfor %}
+    </div>
+
+    <div class="filtr-natija" id="filtrNatija"></div>
+  </div>
+
+  <div class="karta-grid" id="materialGrid">
+    {% for material in materiallar %}
+      <div class="karta material-karta" data-til="{{ material.til }}" data-turi="{{ material.turi }}">
+        <div class="karta-teg">{{ material.get_turi_display }}</div>
+        <div class="karta-nomi">{{ material.nomi }}</div>
+        {% if material.tavsifi %}
+          <div class="karta-tavsif">{{ material.tavsifi }}</div>
+        {% endif %}
+        <div class="karta-past">
+          <span>{{ material.get_til_display }}</span>
+          {% if material.fayl %}
+            <a class="karta-yuklab" href="{{ material.fayl.url }}" download>Yuklab olish</a>
+          {% endif %}
+        </div>
+      </div>
+    {% empty %}
+      <p class="bosh-yoq">Hozircha materiallar mavjud emas.</p>
+    {% endfor %}
+  </div>
+
+  <p class="bosh-yoq" id="natijaYoq" style="display:none;text-align:center;margin-top:2rem;">
+    Tanlangan filtrga mos material topilmadi.
+  </p>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  (function () {
+    const grid = document.getElementById('materialGrid');
+    if (!grid) return;
+
+    const tugmalar = document.querySelectorAll('.filtr-tugma');
+    const kartalar = grid.querySelectorAll('.material-karta');
+    const natijaMatn = document.getElementById('filtrNatija');
+    const natijaYoq = document.getElementById('natijaYoq');
+
+    const tanlov = {
+      til: document.querySelector('.filtr-tugma[data-guruh="til"].faol')?.dataset.qiymat || '',
+      turi: document.querySelector('.filtr-tugma[data-guruh="turi"].faol')?.dataset.qiymat || '',
+    };
+
+    function filtrla() {
+      let sanoq = 0;
+      kartalar.forEach((karta) => {
+        const mos = (!tanlov.til || karta.dataset.til === tanlov.til)
+                 && (!tanlov.turi || karta.dataset.turi === tanlov.turi);
+        karta.style.display = mos ? '' : 'none';
+        if (mos) sanoq++;
+      });
+      natijaMatn.textContent = kartalar.length ? sanoq + ' TA MATERIAL' : '';
+      natijaYoq.style.display = (kartalar.length && sanoq === 0) ? 'block' : 'none';
+      manzilniYangila();
+    }
+
+    function manzilniYangila() {
+      const params = new URLSearchParams();
+      if (tanlov.til) params.set('til', tanlov.til);
+      if (tanlov.turi) params.set('turi', tanlov.turi);
+      const qidiruv = params.toString();
+      history.replaceState(null, '', qidiruv ? '?' + qidiruv : location.pathname);
+    }
+
+    tugmalar.forEach((tugma) => {
+      tugma.addEventListener('click', () => {
+        const guruh = tugma.dataset.guruh;
+        tanlov[guruh] = tugma.dataset.qiymat;
+        document.querySelectorAll('.filtr-tugma[data-guruh="' + guruh + '"]')
+          .forEach((t) => t.classList.toggle('faol', t === tugma));
+        filtrla();
+      });
+    });
+
+    filtrla();
+  })();
+</script>
+{% endblock %}
