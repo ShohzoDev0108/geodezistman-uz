@@ -99,6 +99,11 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STORAGES = {
+    # STORAGES to'liq almashtiriladi, shuning uchun "default" ni ham yozish shart —
+    # aks holda FileField/ImageField.url InvalidStorageError beradi.
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },

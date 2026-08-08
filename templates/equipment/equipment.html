@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Uskunalar — Geodezistman.uz{% endblock %}
+
+{% block content %}
+<div class="sahifa">
+  <h1 class="sahifa-sarlavha">Uskunalar</h1>
+  <p class="sahifa-izoh">Geodezik asboblar va priborlar kategoriyalar bo'yicha</p>
+
+  {% if guruhlar %}
+    <div class="filtr-blok">
+      <div class="filtr-qator">
+        <span class="filtr-nom">Kategoriya</span>
+        <button type="button" class="filtr-tugma{% if not tanlangan_kategoriya %} faol{% endif %}"
+                data-qiymat="">Barchasi</button>
+        {% for guruh in guruhlar %}
+          <button type="button" class="filtr-tugma{% if tanlangan_kategoriya == guruh.slug %} faol{% endif %}"
+                  data-qiymat="{{ guruh.slug }}">{{ guruh.nomi }}</button>
+        {% endfor %}
+      </div>
+      <div class="filtr-natija" id="filtrNatija"></div>
+    </div>
+
+    <div id="uskunaBolimlar">
+      {% for guruh in guruhlar %}
+        <section class="bolim uskuna-bolim" data-kategoriya="{{ guruh.slug }}">
+          <h2 class="bolim-sarlavha">
+            <span>{{ guruh.nomi }}</span>
+            <span class="bolim-soni">{{ guruh.uskunalar|length }} TA</span>
+          </h2>
+          <div class="karta-grid">
+            {% for uskuna in guruh.uskunalar %}
+              <div class="karta">
+                <div class="karta-teg">{{ guruh.nomi }}</div>
+                <div class="karta-nomi">{{ uskuna.nomi }}</div>
+                {% if uskuna.tavsifi %}
+                  <div class="karta-tavsif">{{ uskuna.tavsifi }}</div>
+                {% endif %}
+                {% if uskuna.narxi_diapazoni %}
+                  <div class="karta-past">
+                    <span>{{ uskuna.narxi_diapazoni }}</span>
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        </section>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="bosh-yoq" style="text-align:center;">Hozircha uskunalar mavjud emas.</p>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  (function () {
+    const bolimlarWrap = document.getElementById('uskunaBolimlar');
+    if (!bolimlarWrap) return;
+
+    const tugmalar = document.querySelectorAll('.filtr-tugma');
+    const bolimlar = bolimlarWrap.querySelectorAll('.uskuna-bolim');
+    const natijaMatn = document.getElementById('filtrNatija');
+
+    let tanlangan = document.querySelector('.filtr-tugma.faol')?.dataset.qiymat || '';
+
+    function filtrla() {
+      let sanoq = 0;
+      bolimlar.forEach((bolim) => {
+        const mos = !tanlangan || bolim.dataset.kategoriya === tanlangan;
+        bolim.style.display = mos ? '' : 'none';
+        if (mos) sanoq += bolim.querySelectorAll('.karta').length;
+      });
+      natijaMatn.textContent = sanoq + ' TA USKUNA';
+      const params = new URLSearchParams();
+      if (tanlangan) params.set('kategoriya', tanlangan);
+      const qidiruv = params.toString();
+      history.replaceState(null, '', qidiruv ? '?' + qidiruv : location.pathname);
+    }
+
+    tugmalar.forEach((tugma) => {
+      tugma.addEventListener('click', () => {
+        tanlangan = tugma.dataset.qiymat;
+        tugmalar.forEach((t) => t.classList.toggle('faol', t === tugma));
+        filtrla();
+      });
+    });
+
+    filtrla();
+  })();
+</script>
+{% endblock %}

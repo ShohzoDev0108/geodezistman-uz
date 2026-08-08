@@ -35,11 +35,11 @@
         </div>
       </li>
       <li class="nav-item">
-        <a href="#">Uskunalar <svg class="chev" viewBox="0 0 10 6"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></a>
+        <a href="{% url 'uskunalar_royxati' %}">Uskunalar <svg class="chev" viewBox="0 0 10 6"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></a>
         <div class="dropdown-menu">
-          <a href="#">GPS/GNSS priborlari</a>
-          <a href="#">Tageometrlar</a>
-          <a href="#">Nivelirlar</a>
+          <a href="{% url 'uskunalar_royxati' %}?kategoriya=gpsgnss-priborlari">GPS/GNSS priborlari</a>
+          <a href="{% url 'uskunalar_royxati' %}?kategoriya=tageometrlar">Tageometrlar</a>
+          <a href="{% url 'uskunalar_royxati' %}?kategoriya=nivelirlar">Nivelirlar</a>
         </div>
       </li>
       <li class="nav-item"><a href="#">Biz haqimizda</a></li>
@@ -74,7 +74,7 @@
       <h4>Bo'limlar</h4>
       <a href="{% url 'kurslar_royxati' %}">Kurslar</a>
       <a href="{% url 'materiallar_royxati' %}">Materiallar</a>
-      <a href="#">Uskunalar</a>
+      <a href="{% url 'uskunalar_royxati' %}">Uskunalar</a>
     </div>
     <div class="footer-ustun">
       <h4>Sayt</h4>
