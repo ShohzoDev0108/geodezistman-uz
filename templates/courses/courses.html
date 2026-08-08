@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<title>Kurslar — Geodezistman.uz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<style>
+  .kurslar-wrap{
+    background:var(--bp-bg);
+    min-height:100vh;
+    padding:7rem 2.5rem 3rem;
+    font-family:'Inter',sans-serif;
+  }
+  .kurslar-sarlavha{
+    font-family:'Big Shoulders Display',sans-serif;
+    font-weight:700;
+    font-size:2.2rem;
+    color:var(--bp-chalk);
+    letter-spacing:0.03em;
+    margin-bottom:2rem;
+    text-align:center;
+  }
+  .kurslar-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+    gap:1.5rem;
+    max-width:1100px;
+    margin:0 auto;
+  }
+  .kurs-card{
+    background:#0E2A3D;
+    border:1px solid var(--bp-grid);
+    border-radius:4px;
+    padding:1.5rem;
+  }
+  .kurs-kategoriya{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.06em;
+    color:var(--bp-brass);
+    text-transform:uppercase;
+    margin-bottom:0.6rem;
+  }
+  .kurs-nomi{
+    font-size:1.15rem;
+    font-weight:500;
+    color:var(--bp-chalk);
+    margin-bottom:0.6rem;
+  }
+  .kurs-tavsif{
+    font-size:0.9rem;
+    color:var(--bp-steel);
+    line-height:1.5;
+  }
+  .bosh-utish{
+    display:inline-block;
+    margin-bottom:2rem;
+    color:var(--bp-steel);
+    text-decoration:none;
+    font-size:0.9rem;
+  }
+  .bosh-utish:hover{color:var(--bp-chalk);}
+</style>
+</head>
+<body>
+
+<nav class="navbar" style="position:relative;background:var(--bp-bg);">
+  <div class="nav-left">
+    <a class="nav-logo" href="/">GEODEZISTMAN.UZ</a>
+    <ul class="nav-links">
+      <li class="nav-item"><a href="/">Bosh sahifa</a></li>
+      <li class="nav-item"><a href="/kurslar/">Kurslar</a></li>
+      <li class="nav-item"><a href="#">Materiallar</a></li>
+      <li class="nav-item"><a href="#">Uskunalar</a></li>
+      <li class="nav-item"><a href="#">Biz haqimizda</a></li>
+      <li class="nav-item"><a href="#">Bog'lanish</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <a href="#" class="nav-btn-ghost">Kirish</a>
+    <a href="#" class="nav-btn-fill">Ro'yxatdan o'tish</a>
+  </div>
+</nav>
+
+<div class="kurslar-wrap">
+  <h1 class="kurslar-sarlavha">Barcha kurslar</h1>
+
+  <div class="kurslar-grid">
+    {% for kurs in kurslar %}
+      <div class="kurs-card">
+        <div class="kurs-kategoriya">{{ kurs.kategoriya.nomi }}</div>
+        <div class="kurs-nomi">{{ kurs.nomi }}</div>
+        <div class="kurs-tavsif">{{ kurs.tavsifi }}</div>
+      </div>
+    {% empty %}
+      <p style="color:var(--bp-steel);">Hozircha kurslar mavjud emas.</p>
+    {% endfor %}
+  </div>
+</div>
+
+</body>
+</html>
