@@ -38,3 +38,15 @@ class Lesson(models.Model):
 
     def __str__(self):
         return f"{self.kurs.nomi} — {self.sarlavha}"
+
+class SaytSozlamalari(models.Model):
+    email = models.EmailField(blank=True)
+    telegram = models.CharField(max_length=100, blank=True, help_text="Masalan: @geodezistman")
+    manzil = models.CharField(max_length=200, blank=True)
+
+    class Meta:
+        verbose_name = "Sayt sozlamalari"
+        verbose_name_plural = "Sayt sozlamalari"
+
+    def __str__(self):
+        return "Sayt sozlamalari"

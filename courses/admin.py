@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CourseCategory, Course, Lesson
+from .models import CourseCategory, Course, Lesson, SaytSozlamalari
 
 
 @admin.register(CourseCategory)
@@ -19,3 +19,7 @@ class CourseAdmin(admin.ModelAdmin):
 class LessonAdmin(admin.ModelAdmin):
     list_display = ['sarlavha', 'kurs', 'tartib_raqami']
     list_filter = ['kurs']
+
+@admin.register(SaytSozlamalari)
+class SaytSozlamalariAdmin(admin.ModelAdmin):
+    list_display = ['email', 'telegram', 'manzil']

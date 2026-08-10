@@ -12,10 +12,13 @@
 <body>
 
 {% block navbar %}
-<nav class="navbar {% block navbar_class %}navbar-solid{% endblock %}">
+<nav class="navbar {% block navbar_class %}navbar-solid{% endblock %}" id="siteNav">
   <div class="nav-left">
+    <button type="button" class="nav-burger" id="navBurger" aria-label="Menyu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
     <a class="nav-logo" href="{% url 'home' %}">GEODEZISTMAN.UZ</a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
       <li class="nav-item"><a href="{% url 'home' %}">Bosh sahifa</a></li>
       <li class="nav-item">
         <a href="{% url 'kurslar_royxati' %}">Kurslar <svg class="chev" viewBox="0 0 10 6"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></a>
@@ -44,6 +47,13 @@
       </li>
       <li class="nav-item"><a href="{% url 'biz_haqimizda' %}">Biz haqimizda</a></li>
       <li class="nav-item"><a href="{% url 'boglanish' %}">Bog'lanish</a></li>
+      {# Mobil menyuda Kirish/Ro'yxatdan o'tish shu yerga ko'chadi — .nav-right tor ekranda sig'maydi #}
+      <li class="nav-item nav-auth-mobil">
+        <a href="#">Kirish</a>
+      </li>
+      <li class="nav-item nav-auth-mobil">
+        <a href="#" class="nav-btn-fill-mobil">Ro'yxatdan o'tish</a>
+      </li>
     </ul>
   </div>
   <div class="nav-right">
@@ -62,7 +72,9 @@
 </nav>
 {% endblock %}
 
+<main class="asosiy">
 {% block content %}{% endblock %}
+</main>
 
 <footer class="site-footer">
   <div class="footer-ichki">
@@ -94,13 +106,36 @@
     const searchWrap = document.getElementById('searchWrap');
     const searchToggle = document.getElementById('searchToggle');
     const searchInput = document.getElementById('searchInput');
-    if (!searchWrap || !searchToggle) return;
-    searchToggle.addEventListener('click', () => {
-      searchWrap.classList.toggle('open');
-      if (searchWrap.classList.contains('open')) searchInput.focus();
+    if (searchWrap && searchToggle) {
+      searchToggle.addEventListener('click', () => {
+        searchWrap.classList.toggle('open');
+        if (searchWrap.classList.contains('open')) searchInput.focus();
+      });
+      document.addEventListener('click', (e) => {
+        if (!searchWrap.contains(e.target)) searchWrap.classList.remove('open');
+      });
+    }
+  })();
+
+  (function () {
+    // Mobil navbar: burger tugmasi ro'yxatni ochadi/yopadi, dropdown'li
+    // bandlar esa hover o'rniga tegib bosishga o'tadi (chevron orqali).
+    const nav = document.getElementById('siteNav');
+    const burger = document.getElementById('navBurger');
+    if (!nav || !burger) return;
+
+    burger.addEventListener('click', () => {
+      const ochiq = nav.classList.toggle('menyu-ochiq');
+      burger.setAttribute('aria-expanded', ochiq ? 'true' : 'false');
     });
-    document.addEventListener('click', (e) => {
-      if (!searchWrap.contains(e.target)) searchWrap.classList.remove('open');
+
+    document.querySelectorAll('.nav-item .chev').forEach((chev) => {
+      chev.addEventListener('click', (e) => {
+        if (window.innerWidth > 820) return;
+        e.preventDefault();
+        e.stopPropagation();
+        chev.closest('.nav-item').classList.toggle('mobil-ochiq');
+      });
     });
   })();
 </script>

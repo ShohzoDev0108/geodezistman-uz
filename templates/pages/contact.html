@@ -7,20 +7,25 @@
   <h1 class="sahifa-sarlavha">Bog'lanish</h1>
   <p class="sahifa-izoh">Savol, taklif yoki hamkorlik bo'yicha biz bilan bog'laning</p>
 
-  {# TODO: quyidagi aloqa ma'lumotlari namuna sifatida yozilgan — haqiqiylari bilan almashtirilsin #}
   <ul class="aloqa-royxat">
+    {% if sayt.email %}
     <li class="aloqa-karta">
       <div class="aloqa-turi">Email</div>
-      <a class="aloqa-qiymat" href="mailto:info@geodezistman.uz">info@geodezistman.uz</a>
+      <a class="aloqa-qiymat" href="mailto:{{ sayt.email }}">{{ sayt.email }}</a>
     </li>
+    {% endif %}
+    {% if sayt.telegram %}
     <li class="aloqa-karta">
       <div class="aloqa-turi">Telegram</div>
-      <a class="aloqa-qiymat" href="https://t.me/geodezistman" target="_blank" rel="noopener">@geodezistman</a>
+      <a class="aloqa-qiymat" href="https://t.me/{{ sayt.telegram|cut:'@' }}" target="_blank" rel="noopener">{{ sayt.telegram }}</a>
     </li>
+    {% endif %}
+    {% if sayt.manzil %}
     <li class="aloqa-karta">
       <div class="aloqa-turi">Manzil</div>
-      <span class="aloqa-qiymat">Toshkent, O'zbekiston</span>
+      <span class="aloqa-qiymat">{{ sayt.manzil }}</span>
     </li>
+    {% endif %}
   </ul>
 
   <div class="matn-blok">
